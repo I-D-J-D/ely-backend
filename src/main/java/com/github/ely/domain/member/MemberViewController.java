@@ -1,0 +1,13 @@
+package com.github.ely.domain.member;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller("/member")
+public class MemberViewController {
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <style>
+        * {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+    </style>
+    <script>
+        function loginRegex(input) {
+            const id = document.getElementById("military_id");
+            const err = document.getElementById("id-error-message");
+            const password = document.getElementById("password");
+
+            let regex = /^\d{2}-\d{8}$/;
+            if (input.length > 11 || !regex.test(input.value)) {
+                err.style.display = "block";
+                err.textContent = "올바르지 않은 군번입니다.";
+                password.style.marginTop = "0.05rem";
+                id.style.borderColor = "#E53E3E";
+            } else {
+                id.style.borderColor = "#DADDE1";
+                err.style.display = "none";
+                password.style.marginTop = "1.25rem";
+            }
+        }
+
+        function submit() {
+            const id = document.getElementById("military_id").value;
+            const pw = document.getElementById("password").value;
+        }
+    </script>
+</head>
+<body>
+<logo class="flex items-center justify-center">
+    <img
+            src="./assets/elu-logo.svg"
+            class="mt-[105px] mb-[21px] h-[150px] w-[150px]"
+            alt=""
+    />
+</logo>
+
+<ul class="flex flex-col items-center justify-center mb-[42px]">
+    <li>
+        <p class="text-[24px] font-medium">군 제휴 안경점 관리, 예약 시스템</p>
+    </li>
+    <li><p class="text-[#DC5788] text-[24px] font-black">아이러브유</p></li>
+</ul>
+
+<div class="flex flex-col items-center justify-center gap-6">
+    <form
+            th:action="@{/member/login}" th:method="post"
+            class="flex flex-col items-center justify-center">
+        <div class="flex flex-col">
+            <label for="military_id"></label>
+            <input
+                    onkeyup="loginRegex(this)"
+                    id="military_id"
+                    type="text"
+                    placeholder="군번을 입력하세요."
+                    class="border border-[#DADDE1] placeholder:text-[#C0C6CE] placeholder:text-[14px] rounded-[4px] w-[345px] p-3 focus:border-[#444444] focus:outline-none"
+            />
+            <span
+                    id="id-error-message"
+                    class="ml-3.5 text-[#E53E3E] text-[12px] hidden"
+            ></span>
+
+            <label for="password"></label>
+            <input
+                    id="password"
+                    type="password"
+                    placeholder="비밀번호를 입력하세요."
+                    class="border border-[#DADDE1] mt-4 placeholder:text-[#C0C6CE] placeholder:text-[14px] rounded-[4px] w-[345px] p-3 focus:border-[#444444] focus:outline-none"
+            />
+            <span
+                    id="pw-error-message"
+                    class="ml-4 text-[#E53E3E] text-[12px] hidden"
+            ></span>
+        </div>
+        <div class="mt-6">
+            <button
+                    id="login-button"
+                    type="submit"
+                    class="mb-4 text-[#FFFFFF] bg-[#DC5788] text-[14px] rounded-[6px] w-[345px] p-4 focus:border-[#444444] focus:outline-none">
+                로그인하기
+            </button>
+            <ul class="flex items-center justify-center gap-7">
+                <li
+                        class="text-[13px] text-[#999999] cursor-pointer"
+                        onclick="location.href='/auth/find_pass.html'"
+                >
+                    비밀번호 찾기
+                </li>
+                <li
+                        class="text-[13px] text-[#999999] cursor-pointer"
+                        onclick="location.href='register.html'"
+                >
+                    회원가입
+                </li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
