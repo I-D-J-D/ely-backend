@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>회원가입</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+            rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        .disabled {
+            background-color: #e6e6e7;
+            cursor: not-allowed;
+        }
+
+        .abled {
+            background-color: #dc5788;
+            cursor: pointer;
+        }
+    </style>
+    <script src="/js/register.js"></script>
+</head>
+<body>
+<form th:action="@{/signup}" th:method="post"
+      class="min-h-screen flex flex-col">
+    <div class="w-6 h-6 my-3 ml-4 cursor-pointer">
+        <a href="/login">
+            <img src="/assets/back-icon.svg" alt=""/>
+        </a>
+    </div>
+
+    <div class="mt-8 mx-4 gap-1 flex flex-col">
+        <p class="text-[14px] font-medium">휴대폰번호</p>
+        <input
+                name="phone"
+                id="phone-input"
+                type="tel"
+                placeholder="전화번호를 입력해 주세요"
+                class="signup-input border-b border-[#E6E6E7] py-3 placeholder:text-[#BABABA] placeholder:text-[16px] focus:border-[#DC5788] focus:outline-none"
+        />
+        <span id="error-message" class="text-[#E53E3E] text-[12px]"></span>
+    </div>
+
+
+    <div class="mt-8 mx-4 gap-1 flex flex-col">
+        <p class="text-[14px] font-medium">군번</p>
+        <input
+                name="military_id"
+                id="militaryIdInput"
+                type="text"
+                placeholder="군번을 입력해 주세요"
+                class="signup-input border-b border-[#E6E6E7] py-3 placeholder:text-[#BABABA] placeholder:text-[16px] focus:border-[#DC5788] focus:outline-none"
+        />
+    </div>
+
+    <div class="mt-8 mx-4 gap-1 flex flex-col">
+        <p class="text-[14px] font-medium">비밀번호</p>
+        <input
+                name="password"
+                id="password"
+                type="password"
+                placeholder="영문, 숫자, 특수문자 조합 (8자 이상)"
+                class="signup-input border-b border-[#E6E6E7] py-3 placeholder:text-[#BABABA] placeholder:text-[16px] focus:border-[#DC5788] focus:outline-none"
+        />
+        <span
+                id="pw-error-message"
+                class="text-[#E53E3E] text-[12px]"
+        ></span>
+    </div>
+
+
+    <div class="mt-8 mx-4 gap-1 flex flex-col">
+        <p class="signup-input text-[14px] font-medium">비밀번호 확인</p>
+        <input
+                id="password-check"
+                type="password"
+                placeholder="비밀번호 재입력"
+                class="signup-input border-b border-[#E6E6E7] py-3 placeholder:text-[#BABABA] placeholder:text-[16px] focus:border-[#DC5788] focus:outline-none"
+        />
+        <span
+                id="pwc-error-message"
+                class="text-[#E53E3E] text-[12px]"
+        ></span>
+    </div>
+
+    <div class="mt-8 mx-4 gap-1 flex flex-col mb-3">
+        <p class="text-[14px] font-medium">닉네임</p>
+        <input
+                name="nickname"
+                id="nickname"
+                type="text"
+                placeholder="닉네임"
+                class="signup-input border-b border-[#E6E6E7] py-3 placeholder:text-[#BABABA] placeholder:text-[16px] focus:border-[#DC5788] focus:outline-none"
+        />
+        <a
+                class="text-[14px] text-[#666666] underline flex self-end"
+                onclick="setupName()"
+        >랜덤생성</a
+        >
+    </div>
+
+    <div class="flex place-items-baseline justify-center mt-auto mb-2">
+        <button
+                id="nextBtn"
+                type="submit"
+                class="w-full mx-4 rounded-md text-[#FFFFFF] text-[15px] p-4 disabled"
+        >
+            다음
+        </button>
+    </div>
+</form>
+</body>
+</html>

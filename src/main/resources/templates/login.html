@@ -2,8 +2,8 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>로그인</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -41,13 +41,13 @@
     </script>
 </head>
 <body>
-<logo class="flex items-center justify-center">
+<div class="flex items-center justify-center">
     <img
-            src="./assets/elu-logo.svg"
+            src="/assets/elu-logo.svg"
             class="mt-[105px] mb-[21px] h-[150px] w-[150px]"
             alt=""
     />
-</logo>
+</div>
 
 <ul class="flex flex-col items-center justify-center mb-[42px]">
     <li>
@@ -58,12 +58,13 @@
 
 <div class="flex flex-col items-center justify-center gap-6">
     <form
-            th:action="@{/member/login}" th:method="post"
+            th:action="@{/login}" th:method="post"
             class="flex flex-col items-center justify-center">
         <div class="flex flex-col">
             <label for="military_id"></label>
             <input
                     onkeyup="loginRegex(this)"
+                    name="military_id"
                     id="military_id"
                     type="text"
                     placeholder="군번을 입력하세요."
@@ -76,6 +77,7 @@
 
             <label for="password"></label>
             <input
+                    name="password"
                     id="password"
                     type="password"
                     placeholder="비밀번호를 입력하세요."
@@ -102,7 +104,7 @@
                 </li>
                 <li
                         class="text-[13px] text-[#999999] cursor-pointer"
-                        onclick="location.href='register.html'"
+                        onclick="location.href='/signup'"
                 >
                     회원가입
                 </li>
