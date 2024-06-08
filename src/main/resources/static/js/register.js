@@ -170,3 +170,51 @@ document.addEventListener('DOMContentLoaded', function() {
   // 초기 상태에서 버튼을 비활성화합니다.
   checkInputs();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const nextBtn = document.getElementById("nextBtn");
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      console.log("ee");
+      const additionalContent = document.getElementById("additionalContent");
+      const nextButton = document.getElementById("nextBtn");
+      additionalContent.innerHTML = `
+      <div class="mt-8 mx-4 gap-1 flex flex-col border-b group border-[#E6E6E7]">
+        <p class="text-[14px] font-medium">인증 번호</p>
+        <div class="flex justify-between">
+          <input
+            type="text"
+            placeholder="인증번호를 입력해주세요."
+            class="py-2 placeholder:text-[#BABABA] placeholder:text-[16px] group-focus:border-[#DC5788] focus:outline-none"
+          />
+          <button id="retryBtn" type="button" class="w-[74px] h-[56px] rounded-lg text-[#FFFFFF] text-[14px] p-4 abled">
+            재전송
+          </button>
+        </div>
+        <span id="error-message" class="error text-[#E53E3E] text-[12px]"></span>
+      </div>
+      `;
+
+      const additionalIdentityButton = document.getElementById(
+          "additional-identity-button"
+      );
+
+      additionalIdentityButton.classList.remove('hidden');
+      nextButton.classList.add('hidden');
+
+      additionalIdentityButton.innerHTML = `
+          <div class="w-full flex place-items-baseline justify-center mt-auto mb-2">
+            <button
+              id="identity-button"
+              type="submit"
+              class="w-full mx-4 p-4 rounded-md text-[#FFFFFF] text-[15px] abled"
+            >
+              회원가입
+            </button>
+          </div>
+      `;
+    });
+  }
+});
+
