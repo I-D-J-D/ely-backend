@@ -1,13 +1,198 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>EYE LUV YOU</title>
-</head>
-<body>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+    </style>
+    <!-- 카카오지도 api -->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=953036877c0ea395bcefd90939dce649&libraries=services"
+    ></script>
 
-</body>
+    <!-- 지도ui -->
+    <style>
+      .info-window {
+        padding: 80px;
+        font-size: 14px;
+        /* border-radius: 30px; */
+
+        margin-bottom: 20px;
+      }
+      .info-window a {
+        color: blue;
+        text-decoration: underline;
+      }
+      .info-window .close-btn {
+        display: inline-block;
+        margin-top: 5px;
+        padding: 5px 10px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 지도 canvas -->
+    <div id="map" style="width: 100%; height: 100vh"></div>
+
+    <!-- 카카오 지도 생성 -->
+    <!-- <script>
+      var mapContainer = document.getElementById("map"), // 지도의 중심좌표
+        mapOption = {
+          center: new kakao.maps.LatLng(33.451475, 126.570528), // 지도의 중심좌표
+          level: 3, // 지도의 확대 레벨
+        };
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+    </script> -->
+
+    <script src="js/setup.js"></script>
+    <script>
+      // 마커와 오버레이 데이터
+      var locations = [
+        { lat: 37.5665, lng: 126.978, content: "서울 시청" },
+        { lat: 37.5796, lng: 126.977, content: "경복궁" },
+        { lat: 37.57, lng: 126.992, content: "창덕궁" },
+        { lat: 37.55, lng: 126.99, content: "남산타워" },
+        { lat: 37.541, lng: 127.009, content: "동대문 디자인 플라자" },
+        { lat: 37.501, lng: 127.039, content: "코엑스" },
+        { lat: 37.5792, lng: 126.9748, content: "국립중앙박물관" },
+        { lat: 37.5766, lng: 126.985, content: "종묘" },
+        { lat: 37.5585, lng: 127.0, content: "잠실 롯데타워" },
+        { lat: 37.5694, lng: 126.9778, content: "광화문" },
+      ];
+
+      // 마커와 오버레이 데이터
+      var locations = [
+        {
+          lat: 37.5665,
+          lng: 126.978,
+          content: "서울 시청",
+          link: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%8B%9C%EC%B2%AD",
+        },
+        {
+          lat: 37.5796,
+          lng: 126.977,
+          content: "경복궁",
+          link: "https://map.naver.com/v5/search/%EA%B2%BD%EB%B3%B5%EA%B6%81",
+        },
+        {
+          lat: 37.57,
+          lng: 126.992,
+          content: "창덕궁",
+          link: "https://map.naver.com/v5/search/%EC%B0%BD%EB%8D%95%EA%B6%81",
+        },
+        {
+          lat: 37.55,
+          lng: 126.99,
+          content: "남산타워",
+          link: "https://map.naver.com/v5/search/%EB%82%A8%EC%82%B0%ED%83%80%EC%9B%8C",
+        },
+        {
+          lat: 37.541,
+          lng: 127.009,
+          content: "동대문 디자인 플라자",
+          link: "https://map.naver.com/v5/search/%EB%8F%99%EB%8C%80%EB%AC%B8%20%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%94%8C%EB%9D%BC%EC%9E%90",
+        },
+        {
+          lat: 37.501,
+          lng: 127.039,
+          content: "코엑스",
+          link: "https://map.naver.com/v5/search/%EC%BD%94%EC%97%91%EC%8A%A4",
+        },
+        {
+          lat: 37.5792,
+          lng: 126.9748,
+          content: "국립중앙박물관",
+          link: "https://map.naver.com/v5/search/%EA%B5%AD%EB%A6%BD%EC%A4%91%EC%95%99%EB%B0%95%EB%AC%BC%EA%B4%80",
+        },
+        {
+          lat: 37.5766,
+          lng: 126.985,
+          content: "종묘",
+          link: "https://map.naver.com/v5/search/%EC%A2%85%EB%AC%98",
+        },
+        {
+          lat: 37.5585,
+          lng: 127.0,
+          content: "잠실 롯데타워",
+          link: "https://map.naver.com/v5/search/%EB%A1%AF%EB%8D%B0%ED%83%80%EC%9B%8C",
+        },
+        {
+          lat: 37.5694,
+          lng: 126.9778,
+          content: "광화문",
+          link: "https://map.naver.com/v5/search/%EA%B4%91%ED%99%94%EB%AC%B8",
+        },
+        {
+          lat: 36.1168896,
+          lng: 128.36864,
+          content: "뽀삐",
+          link: "https://map.naver.com/v5/search/%EA%B4%91%ED%99%94%EB%AC%B8",
+        },
+      ];
+
+      // 마커와 오버레이 생성
+      locations.forEach(function (location) {
+        var markerPosition = new kakao.maps.LatLng(location.lat, location.lng);
+        var marker = new kakao.maps.Marker({
+          position: markerPosition,
+          map: map,
+        });
+
+        var content = `
+        <div class="info-window">
+            <div>${location.content}</div>
+            <a href="${location.link}" target="_blank">네이버 지도에서 보기</a>
+            
+        </div>
+    `;
+
+        var overlay = new kakao.maps.InfoWindow({
+          content: content,
+          removable: true,
+        });
+
+        kakao.maps.event.addListener(marker, "click", function () {
+          overlay.open(map, marker);
+
+          // 자식 div의 클래스를 기준으로 조부모 div를 선택하고 수정
+          const childDiv = document.querySelector(".info-window");
+          if (childDiv) {
+            const parentDiv = childDiv.parentElement;
+
+            if (parentDiv) {
+              const grandparentDiv = parentDiv.parentElement;
+              if (grandparentDiv) {
+                // 조부모 div의 스타일 또는 내용을 수정
+                grandparentDiv.style.backgroundColor = "lightblue";
+                grandparentDiv.style.border = "2px solid white";
+                grandparentDiv.style.borderRadius = "15px";
+              }
+            }
+          }
+        });
+
+        // 오버레이 닫기 버튼 핸들러
+        window.closeOverlay = function () {
+          overlay.close();
+        };
+      });
+    </script>
+  </body>
 </html>
