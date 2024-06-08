@@ -6,9 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,9 +21,9 @@ public class MemberApiController {
         return "redirect:/login";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute LoginDto loginDto) {
-        memberService.login(loginDto);
-        return "redirect:/main";
+    @GetMapping("/ok")
+    @ResponseBody
+    public String ok() {
+        return "ok";
     }
 }
