@@ -20,7 +20,7 @@ public class Member {
     private int idx;
 
     @Column(name = "military_id")
-    private String military_id;
+    private String militaryId;
 
     @Column(name = "password")
     private String password;
@@ -40,7 +40,7 @@ public class Member {
 
     public static Member toEntity(MemberDto memberDto) {
         return Member.builder()
-                .military_id(memberDto.getMilitary_id())
+                .militaryId(memberDto.getMilitary_id())
                 .password(memberDto.getPassword())
                 .phone(memberDto.getPhone())
                 .level(memberDto.getLevel())

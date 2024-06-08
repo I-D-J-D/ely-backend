@@ -26,7 +26,7 @@ public class MemberService {
     public void login(LoginDto loginDto) {
 
         // 1. 회원 정보 및 비밀번호 조회
-        Member member = memberRepository.findByMilitary_id(loginDto.getMilitary_id()).orElseThrow(
+        Member member = memberRepository.findByMilitaryId(loginDto.getMilitary_id()).orElseThrow(
                 () -> new RuntimeException("member not found"));
         String encodedPassword = (member == null) ? "" : member.getPassword();
 
