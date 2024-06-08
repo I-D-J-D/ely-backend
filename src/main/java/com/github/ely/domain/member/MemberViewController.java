@@ -15,4 +15,14 @@ public class MemberViewController {
     public String signup() {
         return "signup";
     }
+
+    @GetMapping("/re")
+    public String re() {
+        return "review";
+    }
+
+    @GetMapping("/rew")
+    public String rew() {
+        return "review-write";
+    }
 }
