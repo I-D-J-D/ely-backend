@@ -1,12 +1,8 @@
 package com.github.ely.domain.member;
 
-import com.github.ely.domain.member.dto.LoginDto;
 import com.github.ely.domain.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -25,5 +21,11 @@ public class MemberApiController {
     @ResponseBody
     public String ok() {
         return "ok";
+    }
+
+    @GetMapping("/del")
+    @ResponseBody
+    public String del() {
+        return "del";
     }
 }

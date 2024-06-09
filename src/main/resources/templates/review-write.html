@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>리뷰</title>
     <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
@@ -23,99 +23,106 @@
             background-color: #dc5788;
             cursor: pointer;
         }
+
+        .selected img {
+            content: url('/assets/star-point.svg');
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
+<form class="min-h-screen flex flex-col" th:action="@{/rew}" th:method="post">
+    <!-- 타이틀바 -->
+    <div
+            class="z-30 bg-transparent top-0 select-none sticky flex flex-col"
+            id="Top-bar"
+    >
+        <nav class="h-[48px] flex justify-between bg-white px-[16px]">
+            <ul class="flex items-center">
+                <!-- 왼쪽 아이콘 -->
+                <li>
+                    <!-- 뒤로가기 -->
+                    <img src="/assets/back-icon.svg"/>
+                </li>
+            </ul>
+            <!-- 중간 타이틀 -->
+            <ul class="flex items-center">
+                <li>
+                    <p class="pr-[28px] lg:pl-0 text-black font-medium text-[17px]">
+                        리뷰
+                    </p>
+                </li>
+            </ul>
+            <!-- 오른 아이콘 -->
+            <ul class="flex items-center"></ul>
+        </nav>
+    </div>
 
-<!-- 타이틀바 -->
-<div
-        id="Top-bar"
-        class="z-30 bg-transparent top-0 select-none sticky flex flex-col"
->
-    <nav class="h-[48px] flex justify-between bg-white px-[16px]">
-        <ul class="flex items-center">
-            <!-- 왼쪽 아이콘 -->
-            <li>
-                <!-- 뒤로가기 -->
-                <img src="/assets/back-icon.svg" />
-            </li>
-        </ul>
-        <!-- 중간 타이틀 -->
-        <ul class="flex items-center">
-            <li>
-                <p class="pr-[28px] lg:pl-0 text-black font-medium text-[17px]">
-                    리뷰
-                </p>
-            </li>
-        </ul>
-        <!-- 오른 아이콘 -->
-        <ul class="flex items-center"></ul>
-    </nav>
-</div>
+    <!-- 위치 정보 -->
+    <div
+            class="flex flex-col px-4 py-3.5 justify-start items-start border-b-[8px] border-[#f4f4f4]"
+    >
+        <p class="font-medium text-sm">경상남도 창원시 성산구 가음로 15번길</p>
+        <p class="font-bold text-xl">다비치 안경</p>
+    </div>
 
-<!-- 위치 정보 -->
-<div
-        class="flex flex-col px-4 py-3.5 justify-start items-start border-b-[8px] border-[#f4f4f4]"
->
-    <p class="font-medium text-sm">경상남도 창원시 성산구 가음로 15번길</p>
-    <p class="font-bold text-xl">다비치 안경</p>
-</div>
+    <div
+            class="flex flex-col justify-center items-center mt-12 gap-4 pb-8 border-b border-[#f4f4f4]"
+    >
+        <p class="text-[16px] font-medium">이용은 어떠셨나요?</p>
+        <div class="flex flex-col justify-center items-center">
+            <ul class="flex cursor-pointer">
+                <li class="w-12 h-12" id="review-rating-1">
+                    <img src="/assets/star-gray.svg"/>
+                </li>
+                <li class="w-12 h-12" id="review-rating-2">
+                    <img src="/assets/star-gray.svg"/>
+                </li>
+                <li class="w-12 h-12" id="review-rating-3">
+                    <img src="/assets/star-gray.svg"/>
+                </li>
+                <li class="w-12 h-12" id="review-rating-4">
+                    <img src="/assets/star-gray.svg"/>
+                </li>
+                <li class="w-12 h-12" id="review-rating-5">
+                    <img src="/assets/star-gray.svg"/>
+                </li>
+            </ul>
+            <p class="text-[14px] text-[#999999] font-normal">
+                별점을 선택해주세요.
+            </p>
+        </div>
+    </div>
 
-<div
-        class="flex flex-col justify-center items-center mt-12 gap-4 pb-8 border-b border-[#f4f4f4]"
->
-    <p class="text-[16px] font-medium">이용은 어떠셨나요?</p>
-    <div class="flex flex-col justify-center items-center">
-        <ul class="flex cursor-pointer">
-            <li id="review-1" class="w-12 h-12">
-                <img src="/assets/star-gray.svg" />
-            </li>
-            <li id="review-2" class="w-12 h-12">
-                <img src="/assets/star-gray.svg" />
-            </li>
-            <li id="review-3" class="w-12 h-12">
-                <img src="/assets/star-gray.svg" />
-            </li>
-            <li id="review-4" class="w-12 h-12">
-                <img src="/assets/star-gray.svg" />
-            </li>
-            <li id="review-5" class="w-12 h-12">
-                <img src="/assets/star-gray.svg" />
-            </li>
-        </ul>
-        <p class="text-[14px] text-[#999999] font-normal">
-            별점을 선택해주세요.
+    <div class="flex flex-col mx-4 gap-4 mt-6">
+        <p class="font-medium text-base">내용 입력</p>
+        <textarea
+                name="comment"
+                class="p-2.5 resize-none border border-[#e6e6e7] rounded-[4px] placeholder:text-[15px] w-full h-[175px] focus:bg-gray-50 focus:border-gray-300 focus:ring-gray-300"
+                placeholder="최소 10자 이상 입력해주세요"
+                rows="4"
+                type="text"
+        ></textarea>
+    </div>
+
+    <div class="mt-2 mx-4 flex flex-col gap-2 justify-start items-start">
+        <p class="text-[#bababa] text-[15px] font-normal">
+            *&nbsp;안경점과 무관한 내용, 악의적이거나 부적절한 내용일 시 별도의 통보 없이 삭제 및 제재될 수 있습니다.
+        </p>
+        <p class="text-[#bababa] text-[15px] font-normal">
+            *&nbsp;전화번호, 이메일, 주소, 계좌번호 등 개인정보가 노출되지 않도록 주의하세요.
         </p>
     </div>
-</div>
 
-<div class="flex flex-col mx-4 gap-4 mt-6">
-    <p class="font-medium text-base">내용 입력</p>
-    <textarea
-            type="text"
-            placeholder="최소 10자 이상 입력해주세요"
-            rows="4"
-            class="p-2.5 resize-none border border-[#e6e6e7] rounded-[4px] placeholder:text-[15px] w-full h-[175px] focus:bg-gray-50 focus:border-gray-300 focus:ring-gray-300"
-    ></textarea>
-</div>
-
-<div class="mt-2 mx-4 flex flex-col gap-2 justify-start items-start">
-    <p class="text-[#bababa] text-[15px] font-normal">
-        *&nbsp;안경점과 무관한 내용, 악의적이거나 부적절한 내용일 시 별도의 통보 없이 삭제 및 제재될 수 있습니다.
-    </p>
-    <p class="text-[#bababa] text-[15px] font-normal">
-        *&nbsp;전화번호, 이메일, 주소, 계좌번호 등 개인정보가 노출되지 않도록 주의하세요.
-    </p>
-</div>
-
-<div class="flex justify-center mt-auto mb-2">
-    <button
-            id="nextBtn"
-            type="submit"
-            class="w-full mx-4 p-4 rounded-md text-[#FFFFFF] text-[15px] disabled"
-    >
-        후기 등록
-    </button>
-</div>
+    <div class="flex justify-center mt-auto mb-2">
+        <button
+                class="w-full mx-4 p-4 rounded-md text-[#FFFFFF] text-[15px] abled"
+                id="nextBtn"
+                type="submit"
+        >
+            후기 등록
+        </button>
+    </div>
+</form>
 </body>
+<script src="/js/review-write.js"></script>
 </html>

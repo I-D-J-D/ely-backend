@@ -16,13 +16,5 @@ public class MemberViewController {
         return "signup";
     }
 
-    @GetMapping("/re")
-    public String re() {
-        return "review";
-    }
 
-    @GetMapping("/rew")
-    public String rew() {
-        return "review-write";
-    }
 }
