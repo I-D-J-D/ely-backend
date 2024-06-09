@@ -21,7 +21,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
-                        .defaultSuccessUrl("/ok")
+                        .defaultSuccessUrl("/")
                         .loginProcessingUrl("/login")
                         .usernameParameter("military_id")
                         .passwordParameter("password"))
