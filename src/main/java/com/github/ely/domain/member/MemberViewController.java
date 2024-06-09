@@ -15,6 +15,4 @@ public class MemberViewController {
     public String signup() {
         return "signup";
     }
-
-
 }

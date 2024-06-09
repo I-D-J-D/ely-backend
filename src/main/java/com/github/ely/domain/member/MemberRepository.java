@@ -9,5 +9,7 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    Optional<Member> findByMilitaryId(String email);
+    Optional<Member> findByMilitaryId(String militaryId);
+
+    Boolean existsByMilitaryId(String militaryId);
 }
