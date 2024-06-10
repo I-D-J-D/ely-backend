@@ -16,6 +16,14 @@ public class MemberService {
 
     @Transactional
     public void save(MemberDto memberDto) {
+
+
+        if (memberRepository.existsByMilitaryId(memberDto.getMilitary_id())) {
+            throw new RuntimeException("이미 존재하는 유저입니다.");
+        }
+
+
+
         Member member = Member.toEntity(memberDto);
 
         member.passwordEncode(bCryptPasswordEncoder);

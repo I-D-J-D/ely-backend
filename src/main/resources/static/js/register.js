@@ -179,22 +179,22 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("ee");
       const additionalContent = document.getElementById("additionalContent");
       const nextButton = document.getElementById("nextBtn");
-      additionalContent.innerHTML = `
-      <div class="mt-8 mx-4 gap-1 flex flex-col border-b group border-[#E6E6E7]">
-        <p class="text-[14px] font-medium">인증 번호</p>
-        <div class="flex justify-between">
-          <input
-            type="text"
-            placeholder="인증번호를 입력해주세요."
-            class="py-2 placeholder:text-[#BABABA] placeholder:text-[16px] group-focus:border-[#DC5788] focus:outline-none"
-          />
-          <button id="retryBtn" type="button" class="w-[74px] h-[56px] rounded-lg text-[#FFFFFF] text-[14px] p-4 abled">
-            재전송
-          </button>
-        </div>
-        <span id="error-message" class="error text-[#E53E3E] text-[12px]"></span>
-      </div>
-      `;
+      // additionalContent.innerHTML = `
+      // <div class="mt-8 mx-4 gap-1 flex flex-col border-b group border-[#E6E6E7]">
+      //   <p class="text-[14px] font-medium">인증 번호</p>
+      //   <div class="flex justify-between">
+      //     <input
+      //       type="text"
+      //       placeholder="인증번호를 입력해주세요."
+      //       class="py-2 placeholder:text-[#BABABA] placeholder:text-[16px] group-focus:border-[#DC5788] focus:outline-none"
+      //     />
+      //     <button id="retryBtn" type="button" class="w-[74px] h-[56px] rounded-lg text-[#FFFFFF] text-[14px] p-4 abled">
+      //       재전송
+      //     </button>
+      //   </div>
+      //   <span id="error-message" class="error text-[#E53E3E] text-[12px]"></span>
+      // </div>
+      // `;
 
       const additionalIdentityButton = document.getElementById(
           "additional-identity-button"
