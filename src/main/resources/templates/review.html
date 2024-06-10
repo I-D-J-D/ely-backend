@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>리뷰</title>
     <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
@@ -13,6 +13,11 @@
         * {
             font-family: "Noto Sans KR", sans-serif;
         }
+
+        .abled {
+            background-color: #dc5788;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -22,9 +27,9 @@
     <nav class="h-[48px] flex justify-between bg-white px-[16px]">
         <ul class="flex items-center">
             <!-- 왼쪽 아이콘 -->
-            <li>
+            <li onclick="location.href='/'">
                 <!-- 뒤로가기 -->
-                <img src="/assets/back-icon.svg" />
+                <img src="/assets/back-icon.svg"/>
             </li>
         </ul>
         <!-- 중간 타이틀 -->
@@ -41,25 +46,31 @@
 </div>
 
 <!-- 위치 정보 -->
-<div
-        class="flex flex-col px-4 py-3.5 justify-start items-start border-b-[8px] border-[#f4f4f4]"
->
-    <p class="font-medium text-sm">경상남도 창원시 성산구 가음로 15번길</p>
-    <p class="font-bold text-xl">다비치 안경</p>
-</div>
+<div class="flex justify-between border-b-[8px] border-[#f4f4f4]">
+    <div class="flex flex-col px-4 py-3.5 justify-start items-start">
+        <p class="font-medium text-sm" th:text="${address}">경상남도 창원시 성산구 가음로 15번길</p>
+        <p class="font-bold text-xl" th:text="${shopName}">다비치 안경</p>
+    </div>
 
-<div class="flex m-4 gap-1.5">
-    <p class="font-medium text-[15px]">리뷰</p>
-    <p class="font-medium text-[15px] text-gray-400">2</p>
+    <div class="flex items-center">
+<!--        리뷰등록-->
+<!--        <button-->
+<!--                class="w-fit h-fit mx-4 p-4 rounded-md font-normal text-[#FFFFFF] text-[14px] abled"-->
+<!--                th:onclick="|location.href='@{/rew(address=${address}, shop=${shopName})}'|">-->
+<!--            리뷰 등록-->
+<!--        </button>-->
+    </div>
 </div>
 
 <ul>
     <li
             class="px-4 pb-6 pt-5 border-b border-[#f4f4f4] flex flex-col gap-1.5"
+
+            th:each="user : ${list}"
     >
         <div class="flex justify-between">
-            <p class="font-medium text-[13px]">내 닉네임</p>
-            <img src="/assets/kebab.svg" alt="" srcset="" />
+            <p class="font-medium text-[13px]" th:text="${user.nickname}">내 닉네임</p>
+            <img src="/assets/kebab.svg" alt="" srcset=""/>
         </div>
         <div class="flex justify-start items-center gap-2">
             <ul class="flex cursor-pointer">
@@ -79,45 +90,16 @@
                     <img src="/assets/star-gray.svg" alt=""/>
                 </li>
             </ul>
-            <p class="font-medium text-xs text-[#999999]">2024.04.19</p>
+
+
+            <p class="font-medium text-xs text-[#999999]" th:text="${user.now_date}">2024.04.19</p>
         </div>
-        <p class="font-medium text-sm">
+        <p class="font-medium text-sm" th:text="${user.comment}">
             사진없는 리뷰 사진없는 리뷰 사진없는 리뷰 사진없는 리뷰 사진없는 리뷰
             사진없는 리뷰 진없는 리뷰 사진없는 리뷰 진없는
         </p>
     </li>
-    <li
-            class="px-4 pb-6 pt-5 border-b border-[#f4f4f4] flex flex-col gap-1.5"
-    >
-        <div class="flex justify-between">
-            <p class="font-medium text-[13px]">내 닉네임</p>
-            <img src="/assets/kebab.svg" alt="" srcset="" />
-        </div>
-        <div class="flex justify-start items-center gap-2">
-            <ul class="flex cursor-pointer">
-                <li class="w-4 h-4">
-                    <img src="/assets/star-gray.svg" />
-                </li>
-                <li class="w-4 h-4">
-                    <img src="/assets/star-gray.svg" />
-                </li>
-                <li class="w-4 h-4">
-                    <img src="/assets/star-gray.svg" />
-                </li>
-                <li class="w-4 h-4">
-                    <img src="/assets/star-gray.svg" />
-                </li>
-                <li class="w-4 h-4">
-                    <img src="/assets/star-gray.svg" />
-                </li>
-            </ul>
-            <p class="font-medium text-xs text-[#999999]">2024.04.19</p>
-        </div>
-        <p class="font-medium text-sm">
-            사진없는 리뷰 사진없는 리뷰 사진없는 리뷰 사진없는 리뷰 사진없는 리뷰
-            사진없는 리뷰 진없는 리뷰 사진없는 리뷰 진없는
-        </p>
-    </li>
+
 </ul>
 </body>
 </html>

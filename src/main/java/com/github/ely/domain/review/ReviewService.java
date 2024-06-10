@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -15,8 +17,12 @@ public class ReviewService {
 
     public void save(ReviewWriteDto review) {
         Review reviewEntity = Review.toEntity(review);
-        log.info("save reviewComment: {}", review.getComment());
-        log.info("save review: {}", reviewEntity);
+
         reviewRepository.save(reviewEntity);
+    }
+
+    public List<Review> load(String shop , String address) {
+
+        return reviewRepository.findAllByShopAndAddress(shop, address);
     }
 }
