@@ -14,14 +14,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomUserDetailService.class);
     private final MemberRepository memberRepository;
 
     @Override
     public UserDetails loadUserByUsername(String militaryId) throws UsernameNotFoundException {
-        log.info("loadUserByUsername");
-        log.info("militaryId: {}", militaryId);
-
         Member member = memberRepository.findByMilitaryId(militaryId)
                 .orElseThrow(() -> new RuntimeException("militaryId not found"));
 

@@ -32,6 +32,9 @@ public class Member {
     @Column(name = "nickname")
     private String nickname;
 
+    @Column(name = "role")
+    private String role;
+
     public void passwordEncode(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(this.password);
     }
@@ -43,6 +46,7 @@ public class Member {
                 .phone(memberDto.getPhone())
                 .level(memberDto.getLevel())
                 .nickname(memberDto.getNickname())
+                .role("USER")
                 .build();
     }
 }

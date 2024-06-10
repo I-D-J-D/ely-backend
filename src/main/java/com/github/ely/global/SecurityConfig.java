@@ -36,7 +36,12 @@ public class SecurityConfig {
                         .usernameParameter("military_id")
                         .passwordParameter("password"))
                 .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().permitAll())
+                        .requestMatchers("/", "/re", "/rew").hasRole("USER")
+                        .requestMatchers("/login", "/signup", "/fp", "/assets/**", "/js/**").permitAll()
+                        .anyRequest().authenticated())
+
+
+                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

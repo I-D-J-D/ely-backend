@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,11 +44,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String militaryId = userDetails.getUsername();
+        String role = userDetails.getAuthorities().toString();
 
-        String token = jwtUtil.createJwt(militaryId, 1800000L);
+        String token = jwtUtil.createJwt(militaryId, role, 1800000L);
 
         logger.info("token: " + token);
-        response.addHeader(accessHeader, BEARER + token);
+
+        response.setHeader("Authorization", BEARER + token);
     }
 
     //로그인 실패시 실행하는 메소드
