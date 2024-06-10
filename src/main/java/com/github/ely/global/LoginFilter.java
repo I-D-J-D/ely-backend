@@ -1,7 +1,6 @@
-package com.github.ely.global.Filter;
+package com.github.ely.global;
 
 import com.github.ely.domain.auth.CustomUserDetails;
-import com.github.ely.global.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,9 +18,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
-    @Value("${jwt.access.expiration}")
-    private Long accessTokenExpirationPeriod;
-
     @Value("${jwt.access.header}")
     private String accessHeader;
 
@@ -30,8 +26,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
-        String username = obtainUsername(request);
-        String password = obtainPassword(request);
+        String username = request.getParameter("military_id");
+        String password = request.getParameter("password");
 
         logger.info("username: " + username);
         logger.info("password: " + password);
@@ -47,8 +43,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String militaryId = userDetails.getUsername();
 
-        String token = jwtUtil.createJwt(militaryId, accessTokenExpirationPeriod);
+        String token = jwtUtil.createJwt(militaryId, 1800000L);
 
+        logger.info("token: " + token);
         response.addHeader(accessHeader, BEARER + token);
     }
 

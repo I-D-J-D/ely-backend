@@ -1,6 +1,5 @@
 package com.github.ely.global;
 
-import com.github.ely.global.Filter.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +31,7 @@ public class SecurityConfig {
                         configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
-                        .defaultSuccessUrl("/ok")
+                        .defaultSuccessUrl("/")
                         .loginProcessingUrl("/login")
                         .usernameParameter("military_id")
                         .passwordParameter("password"))
