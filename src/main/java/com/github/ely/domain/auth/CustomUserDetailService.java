@@ -3,6 +3,8 @@ package com.github.ely.domain.auth;
 import com.github.ely.domain.member.MemberRepository;
 import com.github.ely.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,10 +18,9 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String militaryId) throws UsernameNotFoundException {
-
-        Member user = memberRepository.findByMilitaryId(militaryId)
+        Member member = memberRepository.findByMilitaryId(militaryId)
                 .orElseThrow(() -> new RuntimeException("militaryId not found"));
 
-        return new CustomUserDetails(user);
+        return new CustomUserDetails(member);
     }
 }

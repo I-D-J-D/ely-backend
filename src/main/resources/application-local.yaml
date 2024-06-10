@@ -18,3 +18,5 @@ spring:
   config:
     activate:
       on-profile: local
+    import:
+      - application-jwt.yaml

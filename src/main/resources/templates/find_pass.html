@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>비밀번호 찾기</title>
     <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
@@ -18,35 +18,35 @@
 <body>
 <div class="w-6 h-6 my-3 ml-4 cursor-pointer">
     <a href="/login">
-        <img src="/assets/back-icon.svg" alt="" />
+        <img alt="" src="/assets/back-icon.svg"/>
     </a>
 </div>
-<div class="flex flex-col items-center justify-center gap-3">
+<form class="flex flex-col items-center justify-center gap-3" th:action="@{/fp}" th:method="post">
     <div class="flex flex-col items-center justify-center">
         <div class="flex flex-col">
             <input
-                    onkeyup="loginRegex(this)"
-                    id="military_id"
-                    type="text"
-                    placeholder="전화번호를 입력하세요."
                     class="border border-[#DADDE1] placeholder:text-[#C0C6CE] placeholder:text-[14px] rounded-[4px] w-[345px] p-3 focus:border-[#444444] focus:outline-none"
+                    id="phone"
+                    name="phone"
+                    placeholder="전화번호를 입력하세요."
+                    type="text"
             />
             <span
-                    id="id-error-message"
                     class="ml-4 text-[#E53E3E] text-[12px] hidden"
+                    id="id-error-message"
             ></span>
         </div>
     </div>
 
     <div>
         <button
-                id="login-button"
-                type="button"
                 class="mb-4 text-[#FFFFFF] bg-[#DC5788] text-[14px] rounded-[6px] w-[345px] p-4 focus:border-[#444444] focus:outline-none"
+                id="login-button"
+                type="submit"
         >
             비밀번호찾기
         </button>
     </div>
-</div>
+</form>
 </body>
 </html>
