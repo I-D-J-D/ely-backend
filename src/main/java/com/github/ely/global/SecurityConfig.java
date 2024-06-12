@@ -20,15 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final JwtUtil jwtUtil;
 
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         http.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-//                .sessionManagement(configurer ->
-//                        configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
                         .defaultSuccessUrl("/")
@@ -39,11 +36,6 @@ public class SecurityConfig {
                         .requestMatchers("/", "/re", "/rew").hasRole("USER")
                         .requestMatchers("/login", "/signup", "/fp", "/assets/**", "/js/**").permitAll()
                         .anyRequest().authenticated());
-
-
-//                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
-//                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
