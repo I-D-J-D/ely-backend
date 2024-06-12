@@ -28,6 +28,35 @@
             content: url('/assets/star-point.svg');
         }
     </style>
+
+
+    <style>
+        .star-rating {
+            display: flex;
+        }
+
+        .star {
+            appearance: none;
+            padding: 1px;
+        }
+
+        .star::after {
+            content: '☆';
+            color: hsl(60, 80%, 45%);
+            font-size: 60px;
+        }
+
+        .star:hover::after,
+        .star:has(~ .star:hover)::after,
+        .star:checked::after,
+        .star:has(~ .star:checked)::after {
+            content: '★';
+        }
+
+        .star:hover ~ .star::after {
+            content: '☆';
+        }
+    </style>
 </head>
 <body>
 <form class="min-h-screen flex flex-col" th:action="@{/rew}" th:method="post">
@@ -70,33 +99,7 @@
     >
         <p class="text-[16px] font-medium">이용은 어떠셨나요?</p>
         <div class="flex flex-col justify-center items-center">
-            <style>
-                .star-rating {
-                    display: flex;
-                }
 
-                .star {
-                    appearance: none;
-                    padding: 1px;
-                }
-
-                .star::after {
-                    content: '☆';
-                    color: hsl(60, 80%, 45%);
-                    font-size: 60px;
-                }
-
-                .star:hover::after,
-                .star:has(~ .star:hover)::after,
-                .star:checked::after,
-                .star:has(~ .star:checked)::after {
-                    content: '★';
-                }
-
-                .star:hover ~ .star::after {
-                    content: '☆';
-                }
-            </style>
             <div class="star-rating">
                 <input type="radio" name="star" class="star" value="1">
                 <input type="radio" name="star" class="star" value="2">
