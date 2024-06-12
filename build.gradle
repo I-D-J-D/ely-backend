@@ -31,9 +31,9 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
-	implementation 'io.jsonwebtoken:jjwt-impl:0.12.5'
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+//	implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+//	implementation 'io.jsonwebtoken:jjwt-impl:0.12.5'
+//	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 
 	//session db에 저장
 //	implementation 'org.springframework.session:spring-session-jdbc'
