@@ -1,6 +1,0 @@
-jwt:
-  secretKey: ${SECRET_KEY}
-
-  access:
-    expiration: 1800000 # 30분 (1000L(ms -> s) * 60L(s -> m) * 30L(m -> h))
-    header: Authorization
